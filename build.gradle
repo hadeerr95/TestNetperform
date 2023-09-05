@@ -1,0 +1,53 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+id 'com.android.application' version '8.1.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+}
+
+def corePropertiesFile = rootProject.file("core_repo.properties")
+def coreProperties = new Properties()
+coreProperties.load(new FileInputStream(corePropertiesFile))
+
+
+allprojects {
+    repositories {
+        maven {
+            url coreProperties['jfrogUrl']
+            credentials {
+                username coreProperties['jfrogUsername']
+                password coreProperties['jfrogPassword']
+            }
+        }
+
+        maven {
+            url coreProperties['jfrogStagingUrl']
+            credentials {
+                username coreProperties['jfrogUsername']
+                password coreProperties['jfrogPassword']
+            }
+        }
+
+        maven {
+            url coreProperties['JFROG_NETPERFORM_REPO']
+            credentials {
+                username coreProperties['jfrogUsername']
+                password coreProperties['jfrogPassword']
+            }
+        }
+
+        exclusiveContent {
+            forRepository {
+                maven { url "$rootDir/node_modules/react-native/android/" }
+            }
+            filter {
+                includeModule 'com.facebook.react', 'react-native' }
+        }
+        exclusiveContent {
+            forRepository {
+                maven { url "$rootDir/node_modules/jsc-android/dist" }
+            }
+            filter {
+                includeModule 'org.webkit', 'android-jsc' }
+        }
+    }
+}

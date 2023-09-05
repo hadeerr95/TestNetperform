@@ -1,0 +1,30 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://maven.xyz.com" }
+
+    }
+}
+
+rootProject.name = "My Application"
+include ':app', ':react-native-netperform-sdk' , ':async-storage-react-native',
+        'netinfo-react-native', ':react-native-permissions', ':react-native-maps',
+        ':react-native-geolocation', ':react-native-linear-gradient',':lottie-react-native'
+project(':react-native-netperform-sdk').projectDir = new File('node_modules/react-native-netperform-sdk/NetPerformRN/src/android')
+project(':async-storage-react-native').projectDir = new File('node_modules/@react-native-async-storage/async-storage/android')
+project(':netinfo-react-native').projectDir = new File('node_modules/@react-native-community/netinfo/android')
+project(':react-native-permissions').projectDir = new File('node_modules/react-native-permissions/android')
+project(':react-native-maps').projectDir = new File('node_modules/react-native-maps/lib/android')
+project(':react-native-geolocation').projectDir = new File('node_modules/@react-native-community/geolocation/android')
+project(':react-native-linear-gradient').projectDir = new File('node_modules/react-native-linear-gradient/android')
+project(':lottie-react-native').projectDir = new File('node_modules/lottie-react-native/src/android')
+
